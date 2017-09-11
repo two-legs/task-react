@@ -1,12 +1,12 @@
 const webpack = require('webpack');
 const path = require('path');
 const autoprefixer = require('autoprefixer');
-const HtmlPlugin = require('html-webpack-plugin');
 
 const config = {
   entry: [
+    'babel-polyfill',
     'webpack-hot-middleware/client?reload=true',
-    path.resolve(__dirname, './src/index'),
+    path.resolve(__dirname, './src/client'),
   ],
 
   output: {
@@ -25,7 +25,6 @@ const config = {
         test: /\.(js|jsx)$/,
         include: [path.resolve(__dirname, './src')],
         loader: require.resolve('babel-loader'),
-        exclude: /node_modules/,
         options: {
           cacheDirectory: true,
         },
@@ -69,7 +68,7 @@ const config = {
           {
             loader: 'url-loader',
             options: {
-              limit: 16384,
+              limit: 0,
               name: 'assets/[hash:base64:10].[ext]',
             },
           },
@@ -82,14 +81,10 @@ const config = {
     new webpack.EnvironmentPlugin(['NODE_ENV']),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    new HtmlPlugin({
-      template: path.resolve(__dirname, './src/index.html'),
-      chunksSortMode: 'dependency',
-      hash: true,
-    }),
+    new webpack.NamedModulesPlugin(),
   ],
-   
-  devtool: 'eval',
+ 
+  devtool: 'cheap-eval-source-map',
 
   stats: {
     color: true,

@@ -1,14 +1,12 @@
 const webpack = require('webpack');
 const path = require('path');
 const autoprefixer = require('autoprefixer');
-const HtmlPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
-const DEVELOPMENT = process.env.NODE_ENV === 'development';
 
 const config = {
   entry: [
-    path.resolve(__dirname, './src/index'),
+    'babel-polyfill',
+    path.resolve(__dirname, './src/client'),
   ],
 
   output: {
@@ -29,7 +27,6 @@ const config = {
         include: [
           path.resolve(__dirname, './src'),
         ],
-        exclude: /node_modules/,
         options: {
           cacheDirectory: true,
         },
@@ -74,7 +71,7 @@ const config = {
           {
             loader: 'url-loader',
             options: {
-              limit: DEVELOPMENT ? 0 : 16384,
+              limit: 16384,
               name: 'assets/[hash:base64:10].[ext]',
             },
           },
@@ -88,11 +85,6 @@ const config = {
     new webpack.EnvironmentPlugin(['NODE_ENV']),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new ExtractTextPlugin('styles.css'),
-    new HtmlPlugin({
-      template: path.resolve(__dirname, './src/index.html'),
-      chunksSortMode: 'dependency',
-      hash: true,
-    }),
   ],
 
   devtool: 'source-map',
