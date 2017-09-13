@@ -12,11 +12,7 @@ const vendor = [
   'redux',
   'react-redux',
   'redux-thunk',
-  'immutable',
-  'redux-immutablejs',
   'react-router',
-  'react-router-redux',
-  'redux-connect',
   'react-hot-loader',
 ];
 

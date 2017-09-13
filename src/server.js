@@ -8,7 +8,7 @@ export default function (parameters) {
 
   app.use(express.static('public'));
 
-  app.get('*', serverRender);
+  app.get('*', serverRender(parameters.chunks()));
 
   app.listen(port, (error) => {
     if (error) {

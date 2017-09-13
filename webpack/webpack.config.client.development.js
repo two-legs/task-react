@@ -15,9 +15,9 @@ const config = {
 
   entry: {
     main: [
-      `webpack-hot-middleware/client?path=${host}:${port}/__webpack_hmr`,
       'react-hot-loader/patch',
       baseConfig.entry.main,
+      `webpack-hot-middleware/client?path=${host}:${port}/__webpack_hmr`,
     ],
   },
 

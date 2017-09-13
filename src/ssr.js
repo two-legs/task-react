@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import routes from './routes';
 import createStore from './store';
 
-function renderFullPage(html, initialState) {
+function renderFullPage(html, assets, initialState) {
   return `
     <!DOCTYPE html>
       <html>
@@ -15,37 +15,39 @@ function renderFullPage(html, initialState) {
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <title>Hello React</title>
-          <link rel="stylesheet" href="/bundle.css">
+          <link rel="stylesheet" href="${assets.styles.main}">
       </head>
       <body>
         <div id="root">${html}</div>
         <script type="text/javascript">window.__PRELOADED_STATE__=${JSON.stringify(initialState)}</script>
-        <script type="text/javascript" src="/bundle.js"></script>
+        <script type="text/javascript" src="${assets.javascript.main}"></script>
       </body>
     </html>
   `;
 }
 
-function renderApp(req, res) {
-  const context = {};
-  const initialState = { main: { value: 1 } };
-  const store = createStore();
+function renderApp(assets) {
+  return (req, res) => {
+    const context = {};
+    const initialState = { main: { value: 1 } };
+    const store = createStore();
 
-  const html = ReactDOM.renderToString(
-    <Provider store={store}>
-      <StaticRouter location={req.url} context={context}>
-        {renderRoutes(routes)}
-      </StaticRouter>
-    </Provider>,
-  );
+    const html = ReactDOM.renderToString(
+      <Provider store={store}>
+        <StaticRouter location={req.url} context={context}>
+          {renderRoutes(routes)}
+        </StaticRouter>
+      </Provider>,
+    );
 
-  if (context.url) {
-    res.writeHead(301, {
-      Location: context.url,
-    });
-    res.end();
-  } else {
-    res.send(renderFullPage(html, initialState));
+    if (context.url) {
+      res.writeHead(301, {
+        Location: context.url,
+      });
+      res.end();
+    } else {
+      res.send(renderFullPage(html, assets, initialState));
+    }
   }
 }
 

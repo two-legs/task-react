@@ -34,6 +34,5 @@ new WebpackDevServer(compiler, devServerOptions)
       throw error;
     }
     console.info('Webpack development server listening on port %s', port);
-  },
-);
+  });
 

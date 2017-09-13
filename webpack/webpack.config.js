@@ -11,6 +11,7 @@ const config = {
 
   output: {
     path: path.resolve(rootFolder, './public/client'),
+    publicPath: '/client/',
     filename: '[name].[hash].js',
   },
 
@@ -33,7 +34,7 @@ const config = {
       {
         test: /\.p?css$/,
         use: [
-          require.resolve('style-loader'),
+          'style-loader',
           {
             loader: 'css-loader',
             options: {
