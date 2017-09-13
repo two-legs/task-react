@@ -1,17 +1,12 @@
 {
-  "presets":[
-      "es2015", "react"
+  "presets": [
+    "react",
+    "es2015",
+    "stage-0"
   ],
-  "env": {
-    "development": {
-      "presets": ["es2015", "react", "stage-0"],
-      "plugins": ["transform-runtime"],
-      "presets": ["react-hmre"]
-    }
-  },
-  "env": {
-    "build": {
-      "presets": ["es2015", "react", "stage-0"]
-    }
-  }
+  "plugins": [
+    ["transform-runtime"],
+    ["add-module-exports"],
+    ["transform-decorators-legacy"]
+  ]
 }

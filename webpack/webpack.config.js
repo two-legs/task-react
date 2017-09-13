@@ -1,17 +1,17 @@
-const webpack = require('webpack');
-const path = require('path');
-const autoprefixer = require('autoprefixer');
+import path from 'path';
+import autoprefixer from 'autoprefixer';
+
+const rootFolder = path.resolve(__dirname, '..');
 
 const config = {
-  entry: [
-    'babel-polyfill',
-    'webpack-hot-middleware/client?reload=true',
-    path.resolve(__dirname, './src/client'),
-  ],
+  context: rootFolder,
+  entry: {
+    main: './src/client',
+  },
 
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, './public'),
+    path: path.resolve(rootFolder, './public/client'),
+    filename: '[name].[hash].js',
   },
 
   resolve: {
@@ -23,8 +23,8 @@ const config = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        include: [path.resolve(__dirname, './src')],
-        loader: require.resolve('babel-loader'),
+        exclude: /node_modules/,
+        loader: 'babel-loader',
         options: {
           cacheDirectory: true,
         },
@@ -35,7 +35,7 @@ const config = {
         use: [
           require.resolve('style-loader'),
           {
-            loader: require.resolve('css-loader'),
+            loader: 'css-loader',
             options: {
               importLoaders: 1,
               modules: true,
@@ -43,7 +43,7 @@ const config = {
             },
           },
           {
-            loader: require.resolve('postcss-loader'),
+            loader: 'postcss-loader',
             options: {
               ident: 'postcss',
               plugins: () => [
@@ -68,7 +68,7 @@ const config = {
           {
             loader: 'url-loader',
             options: {
-              limit: 0,
+              limit: 16384,
               name: 'assets/[hash:base64:10].[ext]',
             },
           },
@@ -76,21 +76,6 @@ const config = {
       },
     ],
   },
-
-  plugins: [
-    new webpack.EnvironmentPlugin(['NODE_ENV']),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.NamedModulesPlugin(),
-  ],
- 
-  devtool: 'cheap-eval-source-map',
-
-  stats: {
-    color: true,
-    chunks: false,
-    children: false,
-  },
 };
 
-module.exports = config;
+export default config;

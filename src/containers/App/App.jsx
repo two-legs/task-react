@@ -2,7 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
+
+import classNames from 'classnames/bind';
 import styles from './App.css';
+
+const cx = classNames.bind(styles);
 
 const App = ({ route }) => ((
   <div className={styles.app}>
