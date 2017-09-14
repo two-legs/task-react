@@ -16,8 +16,10 @@ const config = {
   entry: {
     main: [
       'react-hot-loader/patch',
+      // `webpack-hot-middleware/client?path=${host}:${port}/__webpack_hmr`,
+      `webpack-dev-server/client?${host}:${port}/`,
+      'webpack/hot/only-dev-server',
       baseConfig.entry.main,
-      `webpack-hot-middleware/client?path=${host}:${port}/__webpack_hmr`,
     ],
   },
 

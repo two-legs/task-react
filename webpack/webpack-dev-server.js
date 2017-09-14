@@ -10,8 +10,8 @@ const WebpackDevServer = require('webpack-dev-server');
 
 // http://webpack.github.io/docs/webpack-dev-server.html
 const devServerOptions = {
-  quiet: true,
-  noInfo: true,
+  quiet: false,
+  noInfo: false,
   hot: true,
 
   publicPath: configuration.output.publicPath,
