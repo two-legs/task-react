@@ -1,0 +1,7 @@
+@import '../../constants.css';
+
+.logo {
+  color: var(--accent-color);
+  font-size: 17px;
+  font-weight: bold;
+}

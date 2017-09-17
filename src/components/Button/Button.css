@@ -1,0 +1,80 @@
+@import '../../constants.css';
+
+.button {
+  display: inline-block;
+  font-size: 13px;
+  text-transform: uppercase;
+  padding: 8px 22px;
+  font-weight: bold;
+  box-sizing: border-box;
+  line-height: 1;
+  border: none;
+  border-radius: 3px;
+  background-color: var(--base-color);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0px 0px 10px 0px #5b5b5b;
+}
+
+.button:hover {
+  background-color: var(--base-color-hover);
+}
+
+.button:active {
+  background-color: var(--base-color-active);
+}
+
+.button:focus {
+  outline:0;
+}
+
+.primary {
+  background-color: var(--accent-color);
+}
+
+.primary:hover {
+  background-color: var(--accent-color-hover);
+}
+
+.primary:active {
+  background-color: var(--accent-color-active);
+}
+
+.big {
+  font-size: 15px;
+  padding: 16px 80px;
+}
+
+.basic {
+  background: none;
+  box-shadow: none;
+  color: var(--text-primary-color);
+  font-size: 17px;
+  padding: 0;
+  text-transform: none;
+}
+
+.basic:hover {
+  color: var(--base-color-hover);
+  background: none;
+}
+
+.basic:active {
+  color: var(--base-color-active);
+  background: none;
+}
+
+.basic.primary {
+  color: var(--accent-color);
+  background: none;
+}
+
+.basic.primary:hover {
+  background-color: var(--accent-color-hover);
+  background: none;
+}
+
+.basic.primary:active {
+  background-color: var(--accent-color-active);
+  background: none;
+}

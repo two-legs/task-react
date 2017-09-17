@@ -1,0 +1,12 @@
+@import '../../constants.css';
+
+.resultsPanel {
+  background-color: #f5f5f5;
+  color: var(--text-primary-color);
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.sortingLabel {
+  margin-right: 18px;
+}

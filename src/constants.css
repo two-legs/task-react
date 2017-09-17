@@ -1,0 +1,10 @@
+:root {
+  --accent-color: #ff5769;
+  --accent-color-hover: #f27f8b;
+  --accent-color-active: #e15362;
+  --base-color: #3c3c3c;
+  --base-color-hover: #5b5b5b;
+  --base-color-active: #2f2f2f;
+  --text-primary-color: #343434;
+  --text-secondary-color: #adadad;
+}

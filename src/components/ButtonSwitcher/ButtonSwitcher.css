@@ -1,0 +1,11 @@
+.buttonSwitcher {
+  display: inline-block;
+}
+
+.switchButton {
+  margin-right: 18px;
+}
+
+.switchButton:last-child {
+  margin-right: 0;
+}

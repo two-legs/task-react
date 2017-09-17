@@ -1,5 +1,5 @@
 import Page from './containers/Page/Page';
-import Articles from './containers/Articles/Articles';
+import SearchPage from './containers/SearchPage/SearchPage';
 import About from './containers/About/About';
 
 const routes = [{
@@ -7,7 +7,7 @@ const routes = [{
   routes: [{
     path: '/',
     exact: true,
-    component: Articles,
+    component: SearchPage,
   }, {
     path: '/about',
     component: About,
