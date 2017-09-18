@@ -1,0 +1,10 @@
+@import '../../constants.css';
+
+.tag {
+  display: block;
+  font-size: 12px;
+  color: var(--text-secondary-color);
+  border: 1px solid var(--text-secondary-color);
+  border-radius: 2px;
+  padding: 2px 10px;
+}

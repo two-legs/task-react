@@ -1,0 +1,28 @@
+@import '../../constants.css';
+
+.card {
+  width: 300px;
+  padding-bottom: 60px;
+}
+
+.cardPoster {
+  width: 300px;
+  height: 450px;
+}
+
+.title {
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--text-primary-color);
+  text-transform: uppercase;
+  padding: 20px 8px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.category {
+  font-size: 13px;
+  color: var(--text-secondary-color);
+  padding: 0 8px 20px;
+}
