@@ -1,5 +1,7 @@
 import path from 'path';
 import autoprefixer from 'autoprefixer';
+import customProperties from 'postcss-custom-properties';
+import atImport from 'postcss-import';
 
 const rootFolder = path.resolve(__dirname, '..');
 
@@ -48,6 +50,8 @@ const config = {
             options: {
               ident: 'postcss',
               plugins: () => [
+                atImport,
+                customProperties,
                 autoprefixer({
                   browsers: [
                     '>1%',
