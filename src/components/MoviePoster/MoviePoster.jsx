@@ -13,7 +13,7 @@ const MoviePoster = props => (
 
 MoviePoster.propTypes = {
   url: PropTypes.string.isRequired,
-  className: PropTypes.oneOfType(PropTypes.string, PropTypes.array),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 };
 
 export default MoviePoster;

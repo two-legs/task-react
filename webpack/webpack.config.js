@@ -68,7 +68,7 @@ const config = {
       },
 
       {
-        test: /\.(woff|woff2|ttf|png|jpg)$/,
+        test: /\.(woff|woff2|ttf|png|jpg|svg)$/,
         use: [
           {
             loader: 'url-loader',

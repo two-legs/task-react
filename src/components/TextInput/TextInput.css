@@ -3,6 +3,7 @@
 .textInput {
   display: inline-block;
   width: 100%;
+  position: relative;
 }
 
 .input {
@@ -24,4 +25,15 @@
 .input.big {
   font-size: 17px;
   padding: 25px 30px;
+}
+
+.inputIcon {
+  width: 20px;
+  height: 20px;
+  fill: #fff;
+  opacity: 0.5;
+  position: absolute;
+  right: 20px;
+  transform: translateY(-50%);
+  top: 50%;
 }

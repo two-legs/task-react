@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import Icon from '../Icon/Icon';
+
 import styles from './TextInput.css';
 
 class TextInput extends Component {
@@ -31,6 +33,7 @@ class TextInput extends Component {
           disabled={this.props.disabled}
           placeholder={this.props.placeholder}
         />
+        <Icon name="return" className={styles.inputIcon} />
       </div>
     );
   }
