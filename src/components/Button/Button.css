@@ -70,11 +70,22 @@
 }
 
 .basic.primary:hover {
-  background-color: var(--accent-color-hover);
-  background: none;
+  background: var(--accent-color-hover) none;
 }
 
 .basic.primary:active {
-  background-color: var(--accent-color-active);
-  background: none;
+  background: var(--accent-color-active) none;
+}
+
+.light {
+  background-color: #fff;
+  color: var(--accent-color);
+}
+
+.light:hover {
+  background-color: #ccc;
+}
+
+.light:active {
+  background-color: #aaa;
 }

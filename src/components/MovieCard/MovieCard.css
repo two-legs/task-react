@@ -2,7 +2,13 @@
 
 .card {
   width: 300px;
-  padding-bottom: 60px;
+  height: 470px;
+  margin-bottom: 40px;
+  cursor: pointer;
+}
+
+.card:hover {
+  box-shadow: 0 0 10px 0 #aaa;
 }
 
 .cardPoster {

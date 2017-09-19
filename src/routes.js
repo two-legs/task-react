@@ -1,6 +1,6 @@
 import Page from './containers/Page/Page';
 import SearchPage from './containers/SearchPage/SearchPage';
-import About from './containers/About/About';
+import MoviePage from './containers/MoviePage/MoviePage';
 
 const routes = [{
   component: Page,
@@ -9,8 +9,8 @@ const routes = [{
     exact: true,
     component: SearchPage,
   }, {
-    path: '/about',
-    component: About,
+    path: '/film',
+    component: MoviePage,
   }],
 }];
 

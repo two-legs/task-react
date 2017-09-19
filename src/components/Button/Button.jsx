@@ -24,9 +24,9 @@ class Button extends PureComponent {
   }
 }
 
-const BigButton = props => <Button {...props} size="big">{props.children}</Button>
+const BigButton = props => <Button {...props} size="big">{props.children}</Button>;
 
-const PrimaryButton = props => <Button {...props} primary>{props.children}</Button>
+const PrimaryButton = props => <Button {...props} primary>{props.children}</Button>;
 
 export default Button;
 export { BigButton, PrimaryButton }

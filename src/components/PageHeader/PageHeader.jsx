@@ -11,6 +11,11 @@ export default props => (
         <PanelGroup>
           <Logo />
         </PanelGroup>
+        {props.buttons &&
+          <PanelGroup>
+            {props.buttons}
+          </PanelGroup>
+        }
       </Panel>
       {props.children}
     </ContentWrapper>
