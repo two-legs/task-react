@@ -1,0 +1,10 @@
+@import '../../constants.css';
+
+.emptyResult {
+  font-size: 60px;
+  color: var(--text-secondary-color);
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 180px;
+  padding-bottom: 270px;
+}

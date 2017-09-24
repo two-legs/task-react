@@ -9,7 +9,16 @@ const routes = [{
     exact: true,
     component: SearchPage,
   }, {
-    path: '/film',
+    path: '/search/:query',
+    component: SearchPage,
+  }, {
+    path: '/search/',
+    component: SearchPage,
+  }, {
+    path: '/film/:title',
+    component: MoviePage,
+  }, {
+    path: '/film/',
     component: MoviePage,
   }],
 }];

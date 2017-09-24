@@ -20,7 +20,13 @@ class TextInput extends Component {
         this.props.onChange(value);
       }
     });
-  }
+  };
+
+  handleKeyPress = (event) => {
+    if (this.props.onEnter && event.key === 'Enter') {
+      this.props.onEnter(this.state.value);
+    }
+  };
 
   render() {
     return (
@@ -32,6 +38,7 @@ class TextInput extends Component {
           onChange={this.handleChange}
           disabled={this.props.disabled}
           placeholder={this.props.placeholder}
+          onKeyPress={this.handleKeyPress}
         />
         <Icon name="return" className={styles.inputIcon} />
       </div>
