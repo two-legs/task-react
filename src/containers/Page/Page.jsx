@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import Footer from '../../components/Footer/Footer';
 

@@ -5,10 +5,10 @@ import Button from '../Button/Button';
 
 import styles from './MovieHeader.css';
 
-const SearchButton = () => <Button type="light" >Search</Button>
+const SearchButton = props => <Button type="light" onClick={props.onClick}>Search</Button>;
 
 export default props => (
-  <PageHeader buttons={[<SearchButton key="search" />]}>
+  <PageHeader buttons={[<SearchButton key="search" onClick={props.onSearchClick} />]}>
     <Movie
       title={props.title}
       category={props.category}

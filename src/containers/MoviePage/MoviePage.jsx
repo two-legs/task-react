@@ -7,9 +7,14 @@ import MovieGrid from '../../components/MovieGrid/MovieGrid';
 // TODO: fix
 const testData = require('../../../assets/testData.json');
 
-const SearchPage = () => (
+const MoviePage = props => (
   <div>
-    <MovieHeader {...testData.movies[0]} />
+    {/* TODO fix demo */}
+    <MovieHeader
+      {...testData.movies[0]}
+      title={decodeURI(props.match.params ? props.match.params.title : '')}
+      onSearchClick={() => props.history.push('/search/')}
+    />
     <ResultsPanel sortable>Films by Quentin Tarantino</ResultsPanel>
     <ContentWrapper>
       <MovieGrid movies={testData.movies} />
@@ -17,4 +22,4 @@ const SearchPage = () => (
   </div>
 );
 
-export default SearchPage;
+export default MoviePage;

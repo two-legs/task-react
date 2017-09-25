@@ -25,7 +25,7 @@ class SearchPage extends PureComponent {
     return (
       <div>
         <SearchHeader
-          query={match.params ? match.params.query : ''}
+          query={match.params && match.params.query ? match.params.query : ''}
           onSearchClick={this.handleSearch}
         />
         <ResultsPanel sortable>7 movies found</ResultsPanel>
