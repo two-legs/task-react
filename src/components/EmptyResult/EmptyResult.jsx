@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import styles from './EmptyResult.css';
 
-const EmptyResult = () => (
+const EmptyResult = props => (
   <div className={styles.emptyResult}>
-    No films found
+    {props.text || 'No films found'}
   </div>
 );
 

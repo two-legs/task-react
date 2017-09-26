@@ -6,7 +6,7 @@ import ResultsPanel from '../../components/ResultsPanel/ResultsPanel';
 import MovieGrid from '../../components/MovieGrid/MovieGrid';
 import EmptyResult from '../../components/EmptyResult/EmptyResult';
 
-// TODO: fix
+// TODO: remove demo data
 const testData = require('../../../assets/testData.json');
 
 class SearchPage extends PureComponent {
@@ -15,7 +15,7 @@ class SearchPage extends PureComponent {
       this.props.history.push(`/search/${encodeURI(value)}`);
     }
   };
-  
+
   render() {
     const {
       match,
@@ -31,7 +31,7 @@ class SearchPage extends PureComponent {
         <ResultsPanel sortable>7 movies found</ResultsPanel>
         <ContentWrapper>
           {films
-            ? <MovieGrid movies={testData.movies} />
+            ? <MovieGrid movies={films} />
             : <EmptyResult />
           }
         </ContentWrapper>
@@ -44,4 +44,7 @@ SearchPage.propTypes = {
   films: PropTypes.arrayOf(PropTypes.object),
 };
 
-export default SearchPage;
+//export default SearchPage;
+
+// TODO remove demo data
+export default props => <SearchPage films={props.match.params.query ? testData.movies : null} {...props}/>

@@ -1,6 +1,7 @@
 import Page from './containers/Page/Page';
 import SearchPage from './containers/SearchPage/SearchPage';
 import MoviePage from './containers/MoviePage/MoviePage';
+import NotFoundPage from './containers/NotFoundPage/NotFoundPage';
 
 const routes = [{
   component: Page,
@@ -18,8 +19,7 @@ const routes = [{
     path: '/film/:title',
     component: MoviePage,
   }, {
-    path: '/film/',
-    component: MoviePage,
+    component: NotFoundPage,
   }],
 }];
 
