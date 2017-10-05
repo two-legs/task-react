@@ -8,6 +8,7 @@ import EmptyResult from '../../components/EmptyResult/EmptyResult';
 
 import loadData from '../../utils/netflix-roulette-api';
 // TODO: fix
+// TODO: remove demo data
 const testData = require('../../../assets/testData.json');
 
 class SearchPage extends PureComponent {
@@ -22,9 +23,9 @@ class SearchPage extends PureComponent {
     if (query) {
       const data = await loadData({ director: decodeURI(query) });
       console.log(data);
-    } 
+    }
   }
-  
+
   render() {
     const {
       match,
@@ -40,7 +41,7 @@ class SearchPage extends PureComponent {
         <ResultsPanel sortable>7 movies found</ResultsPanel>
         <ContentWrapper>
           {films
-            ? <MovieGrid movies={testData.movies} />
+            ? <MovieGrid movies={films} />
             : <EmptyResult />
           }
         </ContentWrapper>
@@ -53,4 +54,7 @@ SearchPage.propTypes = {
   films: PropTypes.arrayOf(PropTypes.object),
 };
 
-export default SearchPage;
+//export default SearchPage;
+
+// TODO remove demo data
+export default props => <SearchPage films={props.match.params.query ? testData.movies : null} {...props}/>
