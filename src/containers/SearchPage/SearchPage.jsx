@@ -6,6 +6,7 @@ import ResultsPanel from '../../components/ResultsPanel/ResultsPanel';
 import MovieGrid from '../../components/MovieGrid/MovieGrid';
 import EmptyResult from '../../components/EmptyResult/EmptyResult';
 
+import loadData from '../../utils/netflix-roulette-api';
 // TODO: fix
 const testData = require('../../../assets/testData.json');
 
@@ -15,6 +16,14 @@ class SearchPage extends PureComponent {
       this.props.history.push(`/search/${encodeURI(value)}`);
     }
   };
+
+  async componentDidMount() {
+    const { query } = this.props.match.params;
+    if (query) {
+      const data = await loadData({ director: decodeURI(query) });
+      console.log(data);
+    } 
+  }
   
   render() {
     const {
