@@ -1,0 +1,12 @@
+export const QUERY_REQUEST = 'QUERY_REQUEST';
+export const QUERY_SUCCESS = 'QUERY_SUCCESS';
+export const QUERY_FAILURE = 'QUERY_FAILURE';
+export const QUERY_SET_TYPE = 'QUERY_SET_TYPE';
+export const RESULTS_SET = 'RESULTS_SET';
+export const SORT_CHANGE = 'SORT_CHANGE';
+export const FILM_REQUEST = 'FILM_REQUEST';
+export const FILM_SUCCESS = 'FILM_SUCCESS';
+export const FILM_FAILURE = 'FILM_FAILURE';
+export const FILM_SELECT = 'FILM_SELECT';
+export const ERROR_SET = 'ERROR_SET';
+export const ERROR_RESET = 'ERROR_RESET';

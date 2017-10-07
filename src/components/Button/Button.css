@@ -70,11 +70,13 @@
 }
 
 .basic.primary:hover {
-  background: var(--accent-color-hover) none;
+  color: var(--accent-color-hover) none;
+  background: none;
 }
 
 .basic.primary:active {
-  background: var(--accent-color-active) none;
+  color: var(--accent-color-active) none;
+  background: none;
 }
 
 .light {

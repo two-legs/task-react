@@ -29,7 +29,7 @@ function renderFullPage(html, assets, initialState) {
 function renderApp(assets) {
   return (req, res) => {
     const context = {};
-    const initialState = { main: { value: 1 } };
+    const initialState = { };
     const store = createStore();
 
     const html = ReactDOM.renderToString(
