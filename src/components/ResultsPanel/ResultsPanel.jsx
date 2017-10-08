@@ -14,7 +14,7 @@ const ResultsPanel = props => (
           ? <PanelGroup>
             <span className={styles.sortingLabel}>Sorting by</span>
             <ButtonSwitcher
-              buttons={[{ id: 'releaseDate', caption: 'release date' }, { id: 'rating', caption: 'rating' }]}
+              buttons={props.sortButtons}
               onSwitch={props.onSortChange}
               buttonType="basic"
             />

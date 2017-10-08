@@ -13,7 +13,7 @@ export const setError = error => ({
 
 export const loadResults = query => async (dispatch) => {
   try {
-    dispatch({ type: types.QUERY_REQUEST, payload: query });
+    dispatch({ type: types.QUERY_REQUEST });
     const results = await loadData(query);
     dispatch(setResults(results));
     dispatch({ type: types.QUERY_SUCCESS });
@@ -24,6 +24,7 @@ export const loadResults = query => async (dispatch) => {
 };
 
 export const searchFilms = queryString => (dispatch, getState) => {
+  dispatch({ type: types.QUERY_SET, payload: queryString });
   const state = getState();
   const field = state.search && state.search.searchBy;
   dispatch(loadResults({ [field]: queryString }));

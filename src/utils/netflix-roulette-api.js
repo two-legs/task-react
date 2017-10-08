@@ -24,6 +24,11 @@ function mapFields(apiResult) {
 }
 
 export default async function loadData(params) {
-  const response = await fetch(`${API_URL}?${qs.stringify(params)}`, { mode: 'cors' });
-  return mapFields(await response.json());
+  try {
+    const response = await fetch(`${API_URL}?${qs.stringify(params)}`, {mode: 'cors'});
+    if (response.status === 404) throw new Error(response.json())
+    return mapFields(await response.json());
+  } catch (e) {
+    throw new Error('Can\'t load data');
+  }
 }

@@ -9,6 +9,7 @@ import {
 const initialState = {
   results: [],
   sortType: 'rating',
+  sortFields: [{ id: 'releaseDate', caption: 'release date' }, { id: 'rating', caption: 'rating' }],
   isPending: false,
 };
 
@@ -19,12 +20,12 @@ const sortByField = (results, field) => (
 const results = (state = initialState, action) => {
   switch (action.type) {
     case RESULTS_SET:
-      return { ...state, results: sortByField(action.payload) };
+      return { ...state, results: sortByField(action.payload, state.sortType) };
     case SORT_CHANGE:
       return {
         ...state,
         sortType: action.payload,
-        results: sortByField(state.results),
+        results: sortByField(state.results, action.payload),
       };
     case QUERY_REQUEST:
       return { ...state, isPending: true };

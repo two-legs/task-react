@@ -15,6 +15,12 @@ export default class SearchHeader extends PureComponent {
     this.state = { query: this.props.query };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(this.props.query !== nextProps.query) {
+      this.setState({ query: nextProps.query });
+    }
+  }
+
   handleChange = (value) => {
     this.setState({ query: value });
   };
@@ -23,6 +29,10 @@ export default class SearchHeader extends PureComponent {
     if (this.props.onSearchClick) {
       this.props.onSearchClick(this.state.query);
     }
+  };
+
+  handleSearchTypeSwitch = (button) => {
+    this.props.onSearchTypeChange(button);
   };
 
   render() {
@@ -40,8 +50,8 @@ export default class SearchHeader extends PureComponent {
           <PanelGroup>
             <TextLabel>Search by</TextLabel>
             <ButtonSwitcher
-              buttons={[{ id: 'title', caption: 'Title' }, { id: 'director', caption: 'Director' }]}
-              onSwitch={button => console.log(button)}
+              buttons={this.props.searchTypes}
+              onSwitch={this.handleSearchTypeSwitch}
             />
           </PanelGroup>
           <PanelGroup>

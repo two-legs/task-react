@@ -10,7 +10,7 @@ const initialState = window.__PRELOADED_STATE__ || {};
 delete window.__PRELOADED_STATE__;
 const store = createStore(initialState);
 
-ReactDOM.render((
+ReactDOM.hydrate((
   <AppContainer>
     <App store={store} />
   </AppContainer>
