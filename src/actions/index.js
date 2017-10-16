@@ -1,30 +1,53 @@
 import * as types from './actionTypes';
 import loadData from '../utils/netflix-roulette-api';
 
-export const setResults = results => ({
-  type: types.RESULTS_SET,
+export const setQuery = query => ({
+  type: types.QUERY_SET,
+  payload: query,
+});
+
+export const fetchResults = query => ({
+  type: types.RESULTS_FETCH,
+  payload: query,
+});
+
+export const fetchResultsSuccess = results => ({
+  type: types.RESULTS_FETCH_SUCCESS,
   payload: results,
 });
 
-export const setError = error => ({
-  type: types.ERROR_SET,
-  payload: error,
+export const fetchResultsError = err => ({
+  type: types.RESULTS_FETCH_FAILURE,
+  payload: err,
+});
+
+export const fetchFilm = query => ({
+  type: types.FILM_FETCH,
+  payload: query,
+});
+
+export const fetchFilmSuccess = results => ({
+  type: types.FILM_FETCH_SUCCESS,
+  payload: results,
+});
+
+export const fetchFilmError = err => ({
+  type: types.FILM_FETCH_FAILURE,
+  payload: err,
 });
 
 export const loadResults = query => async (dispatch) => {
   try {
-    dispatch({ type: types.QUERY_REQUEST });
+    dispatch(fetchResults(query));
     const results = await loadData(query);
-    dispatch(setResults(results));
-    dispatch({ type: types.QUERY_SUCCESS });
-  } catch (e) {
-    dispatch(setError({ message: 'Can\'t load results', error: e.message }));
-    dispatch({ type: types.QUERY_FAILURE });
+    dispatch(fetchResultsSuccess(results));
+  } catch (err) {
+    dispatch(fetchResultsError(err.message || 'Can\'t load results'));
   }
 };
 
 export const searchFilms = queryString => (dispatch, getState) => {
-  dispatch({ type: types.QUERY_SET, payload: queryString });
+  dispatch(setQuery(queryString));
   const state = getState();
   const field = state.search && state.search.searchBy;
   dispatch(loadResults({ [field]: queryString }));
@@ -36,24 +59,17 @@ export const setQueryType = searchField => ({
 });
 
 export const changeSort = sortField => ({
-  type: types.SORT_CHANGE,
+  type: types.RESULTS_SORT_CHANGE,
   payload: sortField,
-});
-
-export const selectFilm = film => ({
-  type: types.FILM_SELECT,
-  payload: film,
 });
 
 export const loadFilm = title => async (dispatch) => {
   try {
-    dispatch({ type: types.FILM_REQUEST });
+    dispatch(fetchFilm(title));
     const result = await loadData({ title });
-    dispatch(selectFilm(result));
-    dispatch({ type: types.FILM_SUCCESS });
+    dispatch(fetchFilmSuccess(result));
     dispatch(loadResults({ director: result.director }));
-  } catch (e) {
-    dispatch(setError({ message: `Can't load film with title ${title}`, error: e.message }));
-    dispatch({ type: types.FILM_FAILURE });
+  } catch (err) {
+    dispatch(fetchFilmError(err.message || `Can't load film with title ${title}`));
   }
 };

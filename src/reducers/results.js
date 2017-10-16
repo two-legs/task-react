@@ -1,9 +1,9 @@
 import {
-  QUERY_SUCCESS,
-  QUERY_REQUEST,
-  QUERY_FAILURE,
-  RESULTS_SET,
-  SORT_CHANGE,
+  RESULTS_FETCH_SUCCESS,
+  RESULTS_FETCH,
+  RESULTS_FETCH_FAILURE,
+  FILM_FETCH_SUCCESS,
+  RESULTS_SORT_CHANGE,
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -19,18 +19,22 @@ const sortByField = (results, field) => (
 
 const results = (state = initialState, action) => {
   switch (action.type) {
-    case RESULTS_SET:
-      return { ...state, results: sortByField(action.payload, state.sortType) };
-    case SORT_CHANGE:
+    case RESULTS_FETCH_SUCCESS:
+    case FILM_FETCH_SUCCESS:
+      return {
+        ...state,
+        isPending: false,
+        results: sortByField(action.payload, state.sortType),
+      };
+    case RESULTS_SORT_CHANGE:
       return {
         ...state,
         sortType: action.payload,
         results: sortByField(state.results, action.payload),
       };
-    case QUERY_REQUEST:
+    case RESULTS_FETCH:
       return { ...state, isPending: true };
-    case QUERY_SUCCESS:
-    case QUERY_FAILURE:
+    case RESULTS_FETCH_FAILURE:
       return { ...state, isPending: false };
     default:
       return state;

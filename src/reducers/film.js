@@ -1,5 +1,5 @@
 import {
-  FILM_SELECT,
+  FILM_FETCH_SUCCESS,
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -8,7 +8,7 @@ const initialState = {
 
 const film = (state = initialState, action) => {
   switch (action.type) {
-    case FILM_SELECT:
+    case FILM_FETCH_SUCCESS:
       return { ...action.payload };
     default:
       return state;
