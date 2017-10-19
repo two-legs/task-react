@@ -1,5 +1,5 @@
 import * as types from './actionTypes';
-import loadData from '../utils/netflix-roulette-api';
+import { search } from '../utils/netflix-roulette-api';
 
 export const setQuery = query => ({
   type: types.QUERY_SET,
@@ -39,7 +39,7 @@ export const fetchFilmError = err => ({
 export const loadResults = query => async (dispatch) => {
   try {
     dispatch(fetchResults(query));
-    const results = await loadData(query);
+    const results = await search(query);
     dispatch(fetchResultsSuccess(results));
   } catch (err) {
     dispatch(fetchResultsError(err.message || 'Can\'t load results'));
@@ -50,7 +50,9 @@ export const searchFilms = queryString => (dispatch, getState) => {
   dispatch(setQuery(queryString));
   const state = getState();
   const field = state.search && state.search.searchBy;
-  dispatch(loadResults({ [field]: queryString }));
+  if (field === 'title') {
+    dispatch(loadResults({ query: queryString }));
+  }
 };
 
 export const setQueryType = searchField => ({
