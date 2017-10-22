@@ -1,42 +1,49 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import MovieHeader from '../../components/MovieHeader/MovieHeader';
 import ContentWrapper from '../../components/ContentWrapper/ContentWrapper';
 import ResultsPanel from '../../components/ResultsPanel/ResultsPanel';
 import MovieGrid from '../../components/MovieGrid/MovieGrid';
+import { loadFilm } from '../../actions/index';
 
-// TODO: remove demo data
-const testData = require('../../../assets/testData.json');
-
-const MoviePage = props => {
-  if (props && props.film) {
-    return (
-      <div>
-        {/* TODO fix demo */}
-        <MovieHeader
-          {...props.film}
-          onSearchClick={() => props.history.push('/search/')}
-        />
-        <ResultsPanel sortable>Films by Quentin Tarantino</ResultsPanel>
-        <ContentWrapper>
-          <MovieGrid movies={testData.movies} />
-        </ContentWrapper>
-      </div>
-    );
+class MoviePage extends PureComponent {
+  componentDidMount() {
+    const { title } = this.props.match.params;
+    if (title) {
+      this.props.onFetch(title);
+    }
   }
 
-  return <Redirect to="/not-found" />;
-};
+  render() {
+    if (this.props && this.props.film) {
+      return (
+        <div>
+          {/* TODO fix demo */}
+          <MovieHeader
+            {...this.props.film}
+            onSearchClick={() => this.props.history.push('/search/')}
+          />
+          <ResultsPanel sortable>Films by Quentin Tarantino</ResultsPanel>
+          <ContentWrapper>
+            <MovieGrid movies={this.props.movies}/>
+          </ContentWrapper>
+        </div>
+      );
+    }
 
-//export default MoviePage;
+    return <Redirect to="/not-found" />;
+  }
+}
 
-// TODO: remove demo data
-export default props => (
-  <MoviePage
-    {...props}
-    film={{
-      ...testData.movies.find(movie => movie.title === decodeURI(props.match.params ? props.match.params.title : ''))
-    }}
-  />
-);
+const mapStateToProps = state => ({
+  film: state.film,
+  movies: state.results.results,
+});
+
+const mapDispatchToProps = dispatch => ({
+  onFetch: title => dispatch(loadFilm(title)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MoviePage);

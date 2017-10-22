@@ -89,5 +89,27 @@ export async function searchByPerson(params) {
   return [];
 }
 
+export async function getFilmByTitle(title) {
+  const results = await search({ query: title });
+  if (results && results[0] && results[0].title === title) {
+    const creditsResponse = await fetch(`${API_URL}/movie/${results[0].id}/credits?${qs.stringify(defaultParams)}`);
+    if (creditsResponse.status >= 400 && creditsResponse.status < 600) {
+      throw new Error(await creditsResponse.json().status_message || 'Can\'t load search results');
+    }
+
+    const credits = await creditsResponse.json();
+    const director = credits.crew.find(item => item.job === 'Director');
+    const casts = credits.cast.map(item => item.name);
+
+    const film = results[0];
+    film.director = director.name;
+    film.showCast = casts.join(', ');
+
+    return film;
+  } else {
+    throw new Error(`Can't find film with title ${title}`);
+  }
+}
+
 genresList = genres(); // fill genres list
 

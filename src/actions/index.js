@@ -2,6 +2,7 @@ import * as types from './actionTypes';
 import {
   search,
   searchByPerson as searchByPersonFetch,
+  getFilmByTitle,
 } from '../utils/netflix-roulette-api';
 
 export const setQuery = query => ({
@@ -83,9 +84,9 @@ export const changeSort = sortField => ({
 export const loadFilm = title => async (dispatch) => {
   try {
     dispatch(fetchFilm(title));
-    const result = await loadData({ title });
+    const result = await getFilmByTitle(title);
     dispatch(fetchFilmSuccess(result));
-    dispatch(searchByTitle({ director: result.director }));
+    dispatch(searchByPerson({ query: result.director }));
   } catch (err) {
     dispatch(fetchFilmError(err.message || `Can't load film with title ${title}`));
   }

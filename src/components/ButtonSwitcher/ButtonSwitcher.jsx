@@ -15,7 +15,10 @@ class ButtonSwitcher extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = { activeButtonId: this.props.buttons.length > 0 && this.props.buttons[0].id };
+    const { buttons } = this.props;
+    this.state = {
+      activeButtonId: buttons && buttons.length > 0 && buttons[0].id,
+    };
   }
 
   handleClick = (button, event) => {
@@ -29,6 +32,8 @@ class ButtonSwitcher extends PureComponent {
 
   render() {
     const { buttons } = this.props;
+    if (!buttons) return null;
+
     return (
       <div className={styles.buttonSwitcher}>
         {buttons.map(button => (

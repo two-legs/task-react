@@ -6,7 +6,7 @@ import {
 const initialState = {
   query: '',
   searchBy: 'title',
-  searchTypes: [{ id: 'title', caption: 'Title' }, { id: 'person', caption: 'Person' }],
+  searchTypes: [{ id: 'title', caption: 'Title' }, { id: 'person', caption: 'Director' }],
 };
 
 const search = (state = initialState, action) => {
