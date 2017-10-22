@@ -35,14 +35,14 @@ async function mapFields(apiResult) {
     return await Promise.all(apiResult.map(item => mapFields(item)));
   }
   const genre = await genreById(apiResult.genre_ids[0]);
-  const year = apiResult.release_date.split('-')[0];
+  const year = apiResult.release_date && apiResult.release_date.split('-')[0];
 
   return {
     id: apiResult.id,
     title: apiResult.title,
     releaseYear: year, // todo
     rating: apiResult.vote_average,
-    category: genre.name, // genres
+    category: genre && genre.name, // genres
     showCast: apiResult.show_cast,
     director: apiResult.director,
     summary: apiResult.overview,
@@ -51,17 +51,6 @@ async function mapFields(apiResult) {
   };
 }
 
-function apiAdapter(apiResult) {
-
-};
-
-export async function loadData(params) {
-  const response = await fetch(`${API_URL}?${qs.stringify(params)}`);
-  if (response.status >= 400 && response.status < 600) {
-    throw new Error(await response.json());
-  }
-  return await mapFields(await response.json());
-}
 
 export async function search(params) {
   const queryParams = { ...defaultParams, ...params };
@@ -77,4 +66,28 @@ export async function search(params) {
   return mappedResult;
 }
 
+export async function searchByPerson(params) {
+  const queryParams = { ...defaultParams, ...params };
+  const response = await fetch(`${API_URL}/search/person?${qs.stringify(queryParams)}`);
+
+  if (response.status >= 400 && response.status < 600) {
+    throw new Error(await response.json().status_message || 'Can\'t load search results');
+  }
+
+  const result = await response.json();
+  const { id } = result.results[0];
+  if (id) {
+    const creditsResponse = await fetch(`${API_URL}/person/${id}/movie_credits?${qs.stringify(defaultParams)}`);
+    if (creditsResponse.status >= 400 && creditsResponse.status < 600) {
+      throw new Error(await creditsResponse.json().status_message || 'Can\'t load search results');
+    }
+
+    const credits = await creditsResponse.json();
+    return await mapFields(credits.crew && credits.crew.filter(movie => movie.job === 'Director'));
+  }
+
+  return [];
+}
+
+genresList = genres(); // fill genres list
 

@@ -1,5 +1,8 @@
 import * as types from './actionTypes';
-import { search } from '../utils/netflix-roulette-api';
+import {
+  search,
+  searchByPerson as searchByPersonFetch,
+} from '../utils/netflix-roulette-api';
 
 export const setQuery = query => ({
   type: types.QUERY_SET,
@@ -36,10 +39,20 @@ export const fetchFilmError = err => ({
   payload: err,
 });
 
-export const loadResults = query => async (dispatch) => {
+export const searchByTitle = query => async (dispatch) => {
   try {
     dispatch(fetchResults(query));
     const results = await search(query);
+    dispatch(fetchResultsSuccess(results));
+  } catch (err) {
+    dispatch(fetchResultsError(err.message || 'Can\'t load results'));
+  }
+};
+
+export const searchByPerson = query => async (dispatch) => {
+  try {
+    dispatch(fetchResults(query));
+    const results = await searchByPersonFetch(query);
     dispatch(fetchResultsSuccess(results));
   } catch (err) {
     dispatch(fetchResultsError(err.message || 'Can\'t load results'));
@@ -51,7 +64,9 @@ export const searchFilms = queryString => (dispatch, getState) => {
   const state = getState();
   const field = state.search && state.search.searchBy;
   if (field === 'title') {
-    dispatch(loadResults({ query: queryString }));
+    dispatch(searchByTitle({ query: queryString }));
+  } else if (field === 'person') {
+    dispatch(searchByPerson({ query: queryString }));
   }
 };
 
@@ -70,7 +85,7 @@ export const loadFilm = title => async (dispatch) => {
     dispatch(fetchFilm(title));
     const result = await loadData({ title });
     dispatch(fetchFilmSuccess(result));
-    dispatch(loadResults({ director: result.director }));
+    dispatch(searchByTitle({ director: result.director }));
   } catch (err) {
     dispatch(fetchFilmError(err.message || `Can't load film with title ${title}`));
   }

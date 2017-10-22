@@ -9,7 +9,7 @@ import {
 const initialState = {
   results: [],
   sortType: 'rating',
-  sortFields: [{ id: 'releaseDate', caption: 'release date' }, { id: 'rating', caption: 'rating' }],
+  sortFields: [{ id: 'releaseYear', caption: 'release date' }, { id: 'rating', caption: 'rating' }],
   isPending: false,
 };
 

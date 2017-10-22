@@ -13,6 +13,7 @@ import {
   changeSort,
   setQueryType,
 } from '../../actions/index';
+import Spinner from '../../components/Spinner/Spinner';
 
 class SearchPage extends PureComponent {
   componentDidMount() {
@@ -42,6 +43,7 @@ class SearchPage extends PureComponent {
       films,
       searchTypes,
       sortFields,
+      isPending,
     } = this.props;
 
     return (
@@ -60,9 +62,14 @@ class SearchPage extends PureComponent {
           {films.length ? `${films.length} movies found` : null}
         </ResultsPanel>
         <ContentWrapper>
-          {films.length
-            ? <MovieGrid movies={films} />
-            : <EmptyResult />
+          {isPending
+            ? <Spinner />
+            : <div>
+              {films.length
+                ? <MovieGrid movies={films} />
+                : <EmptyResult />
+              }
+            </div>
           }
         </ContentWrapper>
       </div>
@@ -82,6 +89,7 @@ SearchPage.propTypes = {
   onSortChange: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   match: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  isPending: PropTypes.bool,
 };
 
 SearchPage.defaultProps = {
@@ -93,6 +101,7 @@ const mapStateToProps = state => ({
   films: state.results.results,
   sortType: state.results.sortType,
   sortFields: state.results.sortFields,
+  isPending: state.results.isPending,
 });
 
 const mapDispatchToProps = dispatch => ({
