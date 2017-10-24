@@ -25,7 +25,7 @@ class MoviePage extends PureComponent {
             {...this.props.film}
             onSearchClick={() => this.props.history.push('/search/')}
           />
-          <ResultsPanel sortable>Films by Quentin Tarantino</ResultsPanel>
+          <ResultsPanel>Films by {this.props.film.director}</ResultsPanel>
           <ContentWrapper>
             <MovieGrid movies={this.props.movies}/>
           </ContentWrapper>
