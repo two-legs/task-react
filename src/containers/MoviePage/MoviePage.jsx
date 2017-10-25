@@ -7,6 +7,8 @@ import ContentWrapper from '../../components/ContentWrapper/ContentWrapper';
 import ResultsPanel from '../../components/ResultsPanel/ResultsPanel';
 import MovieGrid from '../../components/MovieGrid/MovieGrid';
 import { loadFilm } from '../../actions/index';
+import Spinner from '../../components/Spinner/Spinner';
+import Error from '../Error/Error';
 
 class MoviePage extends PureComponent {
   componentDidMount() {
@@ -17,16 +19,20 @@ class MoviePage extends PureComponent {
   }
 
   render() {
-    if (this.props && this.props.film) {
+    const { isPending, ...film } = this.props.film;
+
+    if (isPending) return <Spinner />;
+
+    if (film && film.id) {
       return (
         <div>
-          {/* TODO fix demo */}
           <MovieHeader
-            {...this.props.film}
+            {...film}
             onSearchClick={() => this.props.history.push('/search/')}
           />
           <ResultsPanel>Films by {this.props.film.director}</ResultsPanel>
           <ContentWrapper>
+            <Error />
             <MovieGrid movies={this.props.movies}/>
           </ContentWrapper>
         </div>

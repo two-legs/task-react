@@ -6,14 +6,17 @@ import RatingBadge from '../RatingBadge/RatingBadge';
 
 import styles from './Movie.css';
 
-const MovieCard = props => (
+const Movie = props => (
   <div className={styles.movie}>
     <MoviePoster url={props.posterUrl} className={styles.cardPoster} />
     <div className={styles.description}>
       <div>
         <div className={styles.titleBlock}>
           <h1 className={styles.title}>{props.title}</h1>
-          <RatingBadge rating={props.rating} className={styles.rating} />
+          {props.rating
+            ? <RatingBadge rating={props.rating} className={styles.rating} />
+            : null
+          }
         </div>
         <div className={styles.category}>{props.category}</div>
         <div className={styles.params}>
@@ -38,7 +41,7 @@ const MovieCard = props => (
   </div>
 );
 
-MovieCard.propTypes = {
+Movie.propTypes = {
   posterUrl: PropTypes.string,
   title: PropTypes.string,
   category: PropTypes.string,
@@ -47,7 +50,7 @@ MovieCard.propTypes = {
   summary: PropTypes.string,
   director: PropTypes.string,
   showCast: PropTypes.string,
-  rating: PropTypes.string,
+  rating: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
-export default MovieCard;
+export default Movie;

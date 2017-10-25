@@ -9,7 +9,7 @@ const RatingBadge = ({ rating, className }) => (
 );
 
 RatingBadge.propTypes = {
-  rating: PropTypes.string.isRequired,
+  rating: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   className: PropTypes.string,
 };
 

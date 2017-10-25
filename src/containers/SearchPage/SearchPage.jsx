@@ -14,6 +14,7 @@ import {
   setQueryType,
 } from '../../actions/index';
 import Spinner from '../../components/Spinner/Spinner';
+import Error from '../Error/Error';
 
 class SearchPage extends PureComponent {
   componentDidMount() {
@@ -62,6 +63,7 @@ class SearchPage extends PureComponent {
           {films.length ? `${films.length} movies found` : null}
         </ResultsPanel>
         <ContentWrapper>
+          <Error />
           {isPending
             ? <Spinner />
             : <div>

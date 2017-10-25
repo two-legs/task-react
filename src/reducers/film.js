@@ -3,7 +3,7 @@ import {
 } from '../actions/actionTypes';
 
 const initialState = {
-  isPending: false,
+  isPending: true,
 };
 
 const film = (state = initialState, action) => {

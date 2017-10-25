@@ -2,6 +2,7 @@ import fetch from 'isomorphic-fetch';
 import qs from 'qs';
 
 const API_TOKEN = 'af2d44841a499a2e1df9d9c8e1739dd0';
+// const API_TOKEN = '';
 const API_URL = 'https://api.themoviedb.org/3';
 
 const defaultParams = {
@@ -46,7 +47,7 @@ async function mapFields(apiResult) {
     showCast: apiResult.show_cast,
     director: apiResult.director,
     summary: apiResult.overview,
-    poster: `https://image.tmdb.org/t/p/w300_and_h450_bestv2${apiResult.poster_path}`,
+    poster: apiResult.poster_path && `https://image.tmdb.org/t/p/w300_and_h450_bestv2${apiResult.poster_path}`,
     runtime: apiResult.runtime,
   };
 }
@@ -57,7 +58,7 @@ export async function search(params) {
   const response = await fetch(`${API_URL}/search/movie?${qs.stringify(queryParams)}`);
 
   if (response.status >= 400 && response.status < 600) {
-    throw new Error(await response.json().status_message || 'Can\'t load search results');
+    throw new Error((await response.json()).status_message || 'Can\'t load search results');
   }
 
   const result = await response.json();
@@ -71,7 +72,7 @@ export async function searchByPerson(params) {
   const response = await fetch(`${API_URL}/search/person?${qs.stringify(queryParams)}`);
 
   if (response.status >= 400 && response.status < 600) {
-    throw new Error(await response.json().status_message || 'Can\'t load search results');
+    throw new Error((await response.json()).status_message || 'Can\'t load search results');
   }
 
   const result = await response.json();
@@ -79,7 +80,7 @@ export async function searchByPerson(params) {
   if (id) {
     const creditsResponse = await fetch(`${API_URL}/person/${id}/movie_credits?${qs.stringify(defaultParams)}`);
     if (creditsResponse.status >= 400 && creditsResponse.status < 600) {
-      throw new Error(await creditsResponse.json().status_message || 'Can\'t load search results');
+      throw new Error((await creditsResponse.json()).status_message || 'Can\'t load search results');
     }
 
     const credits = await creditsResponse.json();
@@ -110,6 +111,4 @@ export async function getFilmByTitle(title) {
     throw new Error(`Can't find film with title ${title}`);
   }
 }
-
-genresList = genres(); // fill genres list
 
