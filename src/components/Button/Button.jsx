@@ -11,7 +11,7 @@ class Button extends PureComponent {
     type: PropTypes.string,
     primary: PropTypes.bool,
     onClick: PropTypes.func,
-  }
+  };
 
   render() {
     const { size, type, className, primary, ...buttonProps } = this.props;
@@ -29,5 +29,5 @@ const BigButton = props => <Button {...props} size="big">{props.children}</Butto
 const PrimaryButton = props => <Button {...props} primary>{props.children}</Button>;
 
 export default Button;
-export { BigButton, PrimaryButton }
+export { BigButton, PrimaryButton };
 

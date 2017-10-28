@@ -7,7 +7,7 @@ import styles from './ButtonSwitcher.css';
 
 class ButtonSwitcher extends PureComponent {
   static propTypes = {
-    buttons: PropTypes.array,
+    buttons: PropTypes.array.isRequired,
     onSwitch: PropTypes.func,
     buttonType: PropTypes.string,
   };

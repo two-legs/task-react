@@ -3,10 +3,14 @@ import PropTypes from 'prop-types';
 
 import styles from './EmptyResult.css';
 
-const EmptyResult = props => (
+const EmptyResult = ({ text }) => (
   <div className={styles.emptyResult}>
-    {props.text || 'No films found'}
+    {text || 'No films found'}
   </div>
 );
+
+EmptyResult.propTypes = {
+  text: PropTypes.string,
+};
 
 export default EmptyResult;
