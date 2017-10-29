@@ -10,8 +10,8 @@ const MovieCard = props => (
   <div className={styles.card}>
     <MoviePoster url={props.posterUrl} className={styles.cardPoster} />
     <div className={styles.description}>
-      <div className={styles.title}>
-        <div>{props.title}</div>
+      <div className={styles.titleContainer}>
+        <div className={styles.title}>{props.title}</div>
         <div className={styles.releaseYear}>
           <Tag>{props.releaseYear}</Tag>
         </div>

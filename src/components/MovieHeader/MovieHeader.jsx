@@ -3,8 +3,6 @@ import PageHeader from '../PageHeader/PageHeader';
 import Movie from '../Movie/Movie';
 import Button from '../Button/Button';
 
-import styles from './MovieHeader.css';
-
 const SearchButton = props => <Button type="light" onClick={props.onClick}>Search</Button>;
 
 export default props => (
@@ -22,3 +20,4 @@ export default props => (
     />
   </PageHeader>
 );
+

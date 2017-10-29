@@ -16,7 +16,7 @@
   height: 450px;
 }
 
-.title {
+.titleContainer {
   font-size: 15px;
   font-weight: bold;
   color: var(--text-primary-color);

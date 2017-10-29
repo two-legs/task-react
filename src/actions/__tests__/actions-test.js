@@ -3,24 +3,24 @@ import thunk from 'redux-thunk';
 
 import * as types from '../actionTypes';
 import * as actions from '../index';
-import data from './mockData';
+import data from '../__mocks__/mockData';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 jest.mock('../../utils/netflix-roulette-api', () => ({
   search: ({ query }) => {
-    const mockData = require('./mockData');
+    const mockData = require('../__mocks__/mockData');
     if (query === 'fail') throw new Error('fail');
     return Promise.resolve(mockData.results);
   },
   searchByPerson: ({ query }) => {
-    const mockData = require('./mockData');
+    const mockData = require('../__mocks__/mockData');
     if (query === 'fail') throw new Error('fail');
     return Promise.resolve(mockData.results);
   },
   getFilmByTitle: (title) => {
-    const mockData = require('./mockData');
+    const mockData = require('../__mocks__/mockData');
     if (title === 'fail') throw new Error('fail');
     return Promise.resolve(mockData.film);
   },

@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import styles from './Header.css';
 
 const Header = props => (
-  <div className={styles.header}>
+  <header className={styles.header}>
     {props.children}
-  </div>
+  </header>
 );
 
 export default Header;

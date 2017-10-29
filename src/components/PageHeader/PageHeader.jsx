@@ -4,7 +4,7 @@ import ContentWrapper from '../ContentWrapper/ContentWrapper';
 import Panel, { PanelGroup } from '../Panel/Panel';
 import Logo from '../Logo/Logo';
 
-export default props => (
+const PageHeader = props => (
   <Header>
     <ContentWrapper>
       <Panel>
@@ -21,3 +21,5 @@ export default props => (
     </ContentWrapper>
   </Header>
 );
+
+export default PageHeader;
