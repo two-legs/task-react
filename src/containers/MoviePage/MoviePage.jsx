@@ -8,9 +8,9 @@ import ResultsPanel from '../../components/ResultsPanel/ResultsPanel';
 import MovieGrid from '../../components/MovieGrid/MovieGrid';
 import { loadFilm } from '../../actions/index';
 import Spinner from '../../components/Spinner/Spinner';
-import Error from '../Error/Error';
+import ErrorContainer from '../Error/Error';
 
-class MoviePage extends PureComponent {
+export class MoviePage extends PureComponent {
   componentDidMount() {
     const { title } = this.props.match.params;
     if (title) {
@@ -32,7 +32,7 @@ class MoviePage extends PureComponent {
           />
           <ResultsPanel>Films by {this.props.film.director}</ResultsPanel>
           <ContentWrapper>
-            <Error />
+            <ErrorContainer />
             <MovieGrid movies={this.props.movies}/>
           </ContentWrapper>
         </div>

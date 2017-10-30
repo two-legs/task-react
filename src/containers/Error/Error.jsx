@@ -9,4 +9,5 @@ const Error = ({ message }) => message
     </div>
   ) : null;
 
+export { Error };
 export default connect(state => ({ message: state.error.message }))(Error);
