@@ -5,7 +5,7 @@ import Button from '../Button/Button';
 
 const SearchButton = props => <Button type="light" onClick={props.onClick}>Search</Button>;
 
-export default props => (
+const MovieHeader = props => (
   <PageHeader buttons={[<SearchButton key="search" onClick={props.onSearchClick} />]}>
     <Movie
       title={props.title}
@@ -21,3 +21,4 @@ export default props => (
   </PageHeader>
 );
 
+export default MovieHeader;

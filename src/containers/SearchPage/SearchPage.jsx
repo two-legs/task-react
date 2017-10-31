@@ -14,9 +14,9 @@ import {
   setQueryType,
 } from '../../actions/index';
 import Spinner from '../../components/Spinner/Spinner';
-import Error from '../Error/Error';
+import ErrorContainer from '../Error/Error';
 
-class SearchPage extends PureComponent {
+export class SearchPage extends PureComponent {
   componentDidMount() {
     const { query } = this.props.match.params;
     if (query) {
@@ -63,7 +63,7 @@ class SearchPage extends PureComponent {
           {films.length ? `${films.length} movies found` : null}
         </ResultsPanel>
         <ContentWrapper>
-          <Error />
+          <ErrorContainer />
           {isPending
             ? <Spinner />
             : <div>

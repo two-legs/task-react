@@ -5,7 +5,7 @@ import Logo from '../Logo/Logo';
 
 import styles from './Footer.css';
 
-export default () => (
+const Footer = () => (
   <div className={styles.footer}>
     <ContentWrapper>
       <Panel>
@@ -14,3 +14,5 @@ export default () => (
     </ContentWrapper>
   </div>
 );
+
+export default Footer;

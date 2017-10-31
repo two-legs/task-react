@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import { Error } from '../Error';
 import styles from '../Error.css';
 
-describe('<Error />', () => {
+describe('<ErrorContainer />', () => {
   it('should render without throwing error', () => {
     const message = 'error message';
     const error = shallow(<Error message={message} />);
