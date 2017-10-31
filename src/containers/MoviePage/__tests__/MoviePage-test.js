@@ -32,7 +32,7 @@ describe('<MoviePage />', () => {
   });
 
   it('should render spinner', () => {
-    const page = shallow(<MoviePage film={film} onFetch={() => true} match={{ params: {} }} idPending />);
+    const page = shallow(<MoviePage film={{...film, isPending: true }} onFetch={() => true} match={{ params: {} }} />);
 
     expect(page.find('Spinner').length).toBe(1);
   });
