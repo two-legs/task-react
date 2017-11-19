@@ -32,6 +32,8 @@ const genreById = async (id) => {
 };
 
 async function mapFields(apiResult) {
+  await genres();
+
   if (apiResult instanceof Array) {
     return await Promise.all(apiResult.map(item => mapFields(item)));
   }

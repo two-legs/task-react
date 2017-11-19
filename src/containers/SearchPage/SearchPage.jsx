@@ -17,12 +17,17 @@ import Spinner from '../../components/Spinner/Spinner';
 import ErrorContainer from '../Error/Error';
 
 export class SearchPage extends PureComponent {
-  componentDidMount() {
-    const { query } = this.props.match.params;
+  static async fetch(match, dispatch) {
+    const { query } = match.params;
     if (query) {
-      this.props.onSearch(query);
+      dispatch(await searchFilms(query));
     }
   }
+
+  componentDidMount() {
+    SearchPage.fetch(this.props.match, this.props.dispatch);
+  }
+
   handleSearch = (value) => {
     if (value !== encodeURI(this.props.match.query)) {
       this.props.history.push(`/search/${encodeURI(value)}`);
@@ -92,6 +97,7 @@ SearchPage.propTypes = {
   history: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   match: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   isPending: PropTypes.bool,
+  dispatch: PropTypes.func,
 };
 
 SearchPage.defaultProps = {
@@ -110,6 +116,7 @@ const mapDispatchToProps = dispatch => ({
   onSearch: query => dispatch(searchFilms(query)),
   onSearchTypeChange: type => dispatch(setQueryType(type)),
   onSortChange: type => dispatch(changeSort(type)),
+  dispatch,
 });
 
 const SearchPageConnected = connect(mapStateToProps, mapDispatchToProps)(SearchPage);

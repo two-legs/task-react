@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/server';
 import { StaticRouter } from 'react-router';
-import { renderRoutes } from 'react-router-config';
+import { renderRoutes, matchRoutes } from 'react-router-config';
 import { Provider } from 'react-redux';
 import routes from './routes';
 import createStore from './store';
@@ -46,9 +46,19 @@ function renderApp(assets) {
       });
       res.end();
     } else {
-      res.send(renderFullPage(html, assets, initialState));
+      const branch = matchRoutes(routes, req.url);
+      const promises = branch.map(({ route, match }) => {
+        return route.component && route.component.fetch
+          ? route.component.fetch(match, store.dispatch)
+          : Promise.resolve(null);
+      });
+
+      Promise.all(promises).then(() => {
+        res.send(renderFullPage(html, assets, store.getState()));
+        console.log('RESOLVED');
+      });
     }
-  }
+  };
 }
 
 export default renderApp;
