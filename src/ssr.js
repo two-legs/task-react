@@ -29,35 +29,33 @@ function renderFullPage(html, assets, initialState) {
 function renderApp(assets) {
   return (req, res) => {
     const context = {};
-    const initialState = { };
     const store = createStore();
 
-    const html = ReactDOM.renderToString(
-      <Provider store={store}>
-        <StaticRouter location={req.url} context={context}>
-          {renderRoutes(routes)}
-        </StaticRouter>
-      </Provider>,
-    );
+    const branch = matchRoutes(routes, req.url);
+    const promises = branch.map(({ route, match }) => {
+      return route.component && route.component.fetch
+        ? route.component.fetch(match, store.dispatch)
+        : Promise.resolve(null);
+    });
 
-    if (context.url) {
-      res.writeHead(301, {
-        Location: context.url,
-      });
-      res.end();
-    } else {
-      const branch = matchRoutes(routes, req.url);
-      const promises = branch.map(({ route, match }) => {
-        return route.component && route.component.fetch
-          ? route.component.fetch(match, store.dispatch)
-          : Promise.resolve(null);
-      });
+    Promise.all(promises).then(() => {
+      const html = ReactDOM.renderToString(
+        <Provider store={store}>
+          <StaticRouter location={req.url} context={context}>
+            {renderRoutes(routes)}
+          </StaticRouter>
+        </Provider>,
+      );
 
-      Promise.all(promises).then(() => {
+      if (context.url) {
+        res.writeHead(301, {
+          Location: context.url,
+        });
+        res.end();
+      } else {
         res.send(renderFullPage(html, assets, store.getState()));
-        console.log('RESOLVED');
-      });
-    }
+      }
+    });
   };
 }
 

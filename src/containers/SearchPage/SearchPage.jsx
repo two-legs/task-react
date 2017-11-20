@@ -20,8 +20,9 @@ export class SearchPage extends PureComponent {
   static async fetch(match, dispatch) {
     const { query } = match.params;
     if (query) {
-      dispatch(await searchFilms(query));
+      return dispatch(searchFilms(decodeURI(query)));
     }
+    return Promise.reject();
   }
 
   componentDidMount() {

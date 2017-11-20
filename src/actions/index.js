@@ -43,10 +43,9 @@ export const fetchFilmError = err => ({
 export const searchByTitle = query => async (dispatch) => {
   try {
     dispatch(fetchResults(query));
+
     const results = await search(query);
     dispatch(fetchResultsSuccess(results));
-    console.log('loaded');
-    return Promise.resolve();
   } catch (err) {
     dispatch(fetchResultsError(err.message || 'Can\'t load results'));
   }
@@ -67,10 +66,12 @@ export const searchFilms = queryString => async (dispatch, getState) => {
   const state = getState();
   const field = state.search && state.search.searchBy;
   if (field === 'title') {
-    return dispatch(await searchByTitle({ query: queryString }));
+    return dispatch(searchByTitle({ query: queryString }));
   } else if (field === 'person') {
-    dispatch(await searchByPerson({ query: queryString }));
+    return dispatch(searchByPerson({ query: queryString }));
   }
+
+  return Promise.reject();
 };
 
 export const setQueryType = searchField => ({
