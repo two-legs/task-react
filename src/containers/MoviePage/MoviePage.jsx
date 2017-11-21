@@ -11,6 +11,14 @@ import Spinner from '../../components/Spinner/Spinner';
 import ErrorContainer from '../Error/Error';
 
 export class MoviePage extends PureComponent {
+  static async fetch(match, dispatch) {
+    const { title } = match.params;
+    if (title) {
+      return dispatch(loadFilm(decodeURI(title)));
+    }
+    return Promise.reject();
+  }
+
   componentDidMount() {
     const { title } = this.props.match.params;
     if (title) {
